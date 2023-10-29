@@ -22,52 +22,33 @@ const io = new Server(server, {
 
 
 io.on("connection", (socket) => {
-    const userIP = socket.handshake.address;
-    console.log(userIP);
-    console.log('A user connected');
-
-    let x = true;
-    socket.on('chat message', (message ) => {
-       while (x === true){
-       io.emit('chat message', (message ));
-       console.log('messages sent');
-       x = false;
-       };
-       setInterval(() => {
-        x = true;
-       },100);
-    });
-
-    socket.on("onuser", (t) => {
-        io.emit("usern", t);
-       
-    });
-
-    socket.on("out", (w) => {
-        io.emit("out", w);
-        console.log(w + " logged out");
-    });
-
-    socket.on("server-kill", (authData) => {
-        const { authkey, authcode } = authData; // Destructure the authData object
-        if (authkey === "iloveamelie" && authcode === "260908180608") { 
-            io.emit("server", "Server has shut down");
-            server.closeAllConnections();
-            server.close();
-            io.emit("server", "Server has shut down");
-            
-            console.log("shutdown success")
-            
-        } else {
-            io.emit("server", "Authentication failed, unable to shut down the server.");
-        }
-    });
     
 
-    // Handle disconnection
-    socket.on('disconnect', () => {
-        console.log('A user disconnected');
-    });
+	const options = {
+ 	 method: 'POST',
+  	hostname: 'api.render.com',
+  	port: null,
+  	path: '/v1/services/srv-ckud7cmb0mos738u2ssg/suspend',
+  	headers: {
+   	 accept: 'application/json',
+    	authorization: 'Bearer rnd_dbjVtRsFHMVGqUPbdHtlPLN4ulbq'
+  	}
+	};
+
+	const req = http.request(options, function (res) {
+ 	 	const chunks = [];
+
+  		res.on('data', function (chunk) {
+   		 chunks.push(chunk);
+  		});
+
+  		res.on('end', function () {
+   		 const body = Buffer.concat(chunks);
+    	 console.log(body.toString());
+  		});
+	});
+
+	req.end();
 });
 
 const PORT = process.env.PORT || 5500;
