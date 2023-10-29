@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
 
 	const options = {
   	method: 'POST',
-  	url: 'https://api.render.com/v1/services/srv-ckud7cmb0mos738u2ssg/resume',
+  	url: 'https://api.render.com/v1/services/srv-ckud7cmb0mos738u2ssg/suspend',
   	headers: {
     	accept: 'application/json',
     	authorization: 'Bearer rnd_dbjVtRsFHMVGqUPbdHtlPLN4ulbq'
