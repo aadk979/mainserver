@@ -13,18 +13,8 @@ const io = new Server(server, {
     }
 });
 
-// Assuming you have a Socket.IO server instance named 'io'
-
-
-// Usage:
-// Call this function when you want to close all connections, for example, before shutting down the server.
-
-
-
-io.on("connection", (socket) => {
-    
-
-	const axios = require('axios');
+function kill(){
+  const axios = require('axios');
 
 	const options = {
   	method: 'POST',
@@ -39,11 +29,22 @@ io.on("connection", (socket) => {
   	.request(options)
   	.then(function (response) {
     	console.log(response.data);
+      io.emit("server" , "server shut down succesfully");
   	})
   	.catch(function (error) {
     	console.error(error);
   	});
+}
 
+
+io.on("connection", (socket) => {
+    socket.on("server-kill" , (data) =>{
+      if (data.akc === "I like amelie" && data.acc === "260908180608"){
+       kill();
+      }else{
+        io.emit("server" , "Authentication failed , unable to shutdown server");
+      }
+    });
 });
 
 const PORT = process.env.PORT || 5500;
