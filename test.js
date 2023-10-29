@@ -24,13 +24,25 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     
 
-	const sdk = require('api')('@render-api/v1.0#1ifry11lo91zxhg');
+	const axios = require('axios');
 
-	sdk.auth('rnd_dbjVtRsFHMVGqUPbdHtlPLN4ulbq');
-	sdk.resumeService({serviceId: 'srv-ckud7cmb0mos738u2ssg'})
-  	.then(({ data }) => console.log(data))
-  	.catch(err => console.error(err));
-		});
+	const options = {
+  	method: 'POST',
+  	url: 'https://api.render.com/v1/services/srv-ckud7cmb0mos738u2ssg/resume',
+  	headers: {
+    	accept: 'application/json',
+    	authorization: 'Bearer rnd_dbjVtRsFHMVGqUPbdHtlPLN4ulbq'
+  	}
+	};
+
+	axios
+  	.request(options)
+  	.then(function (response) {
+    	console.log(response.data);
+  	})
+  	.catch(function (error) {
+    	console.error(error);
+  	});
 
 });
 
