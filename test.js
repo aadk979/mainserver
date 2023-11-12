@@ -18,7 +18,7 @@ function kill(){
 
 	const options = {
   	method: 'POST',
-  	url: 'https://api.render.com/v1/services/srv-ckud7cmb0mos738u2ssg/suspend',
+  	url: 'https://api.render.com/v1/services/srv-cl7plbauuipc73ejtf30/suspend',
   	headers: {
     	accept: 'application/json',
     	authorization: 'Bearer rnd_dbjVtRsFHMVGqUPbdHtlPLN4ulbq'
