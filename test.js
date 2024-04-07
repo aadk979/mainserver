@@ -39,10 +39,12 @@ function kill(){
 
 io.on("connection", (socket) => {
     socket.on("server-kill" , (data) =>{
-      if (data.akc === "I like amelie" && data.acc === "260908180608"){
+      if (data.akc === process.env.akc && data.acc === process.env.acc){
        kill();
+       return;
       }else{
         io.emit("server" , "Authentication failed , unable to shutdown server");
+	return;
       }
     });
 });
